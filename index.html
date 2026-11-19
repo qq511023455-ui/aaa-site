@@ -1,11 +1,290 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<title>aaa.vvpp.cc</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>虚拟商品小店</title>
+<style>
+:root{
+  /* 修改这里：网站颜色 */
+  --main:#635bff;
+  --bg:#f5f6fa;
+  --text:#202235;
+  --muted:#6b7280;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6
+}
+header{
+  padding:22px 5%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:#fff
+}
+.brand{font-weight:800;font-size:20px}
+header a{color:var(--main);text-decoration:none}
+main{max-width:980px;margin:35px auto;padding:0 18px}
+.hero{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:28px;
+  background:white;
+  padding:28px;
+  border-radius:22px;
+  box-shadow:0 12px 35px #2022350a
+}
+.art{
+  min-height:300px;
+  border-radius:18px;
+  background:linear-gradient(135deg,#dfe4ff,#e9f9f2);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:25px;
+  font-size:64px
+}
+.art small{display:block;font-size:16px;color:#4b5563}
+h1{font-size:30px;line-height:1.3;margin:5px 0 12px}
+.desc{color:var(--muted)}
+.price{font-size:34px;color:var(--main);font-weight:800;margin:18px 0}
+.price small{font-size:14px;color:var(--muted);font-weight:400}
+.btn{
+  display:block;width:100%;border:0;border-radius:12px;
+  padding:14px 16px;font-size:16px;font-weight:700;
+  cursor:pointer;text-decoration:none;text-align:center;margin:10px 0
+}
+.primary{background:var(--main);color:white}
+.secondary{background:#eef0ff;color:var(--main)}
+.panel{background:white;margin-top:22px;padding:24px;border-radius:18px}
+.panel h2{font-size:20px;margin-top:0}
+ul{padding-left:20px}
+.notice{background:#fff8e8;border-radius:12px;padding:13px;color:#7c5100;font-size:14px}
+.paygrid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.paybox{border:1px solid #e5e7eb;border-radius:14px;padding:16px;text-align:center}
+.qr{width:180px;height:180px;max-width:100%;object-fit:contain;background:#f3f4f6;border-radius:10px}
+.order{background:#f7f7ff;border-radius:14px;padding:16px;margin:15px 0}
+.order code{font-size:18px;font-weight:bold;word-break:break-all}
+footer{text-align:center;color:var(--muted);padding:30px 15px;font-size:13px}
+@media(max-width:720px){
+  .hero{grid-template-columns:1fr}
+  .art{min-height:220px}
+  .paygrid{grid-template-columns:1fr}
+  h1{font-size:25px}
+}
+</style>
 </head>
 <body>
-<h1>Hello World</h1>
-<p>Welcome to aaa.vvpp.cc</p>
+
+<header>
+  <!-- 修改这里：店铺名称 -->
+  <div class="brand">✨ 星光数字小店</div>
+  <a href="#buy">购买商品</a>
+</header>
+
+<main>
+
+<section class="hero">
+  <div class="art">
+    <!-- 修改这里：商品图片展示区域 -->
+    <div>📦<small>数字商品展示图</small></div>
+  </div>
+
+  <div>
+    <!-- 修改这里：商品标题 -->
+    <h1>高效学习资料包</h1>
+
+    <!-- 修改这里：商品介绍 -->
+    <p class="desc">
+      一份方便使用的数字资料。
+      购买后由卖家核实付款并发送交付链接。
+    </p>
+
+    <!-- 修改这里：商品价格 -->
+    <div class="price">¥19.90 <small>一次付款</small></div>
+
+    <a class="btn primary" href="#buy">立即购买</a>
+    <p class="desc">数字商品 · 付款核实后交付 · 请阅读售后说明</p>
+  </div>
+</section>
+
+<section class="panel">
+  <h2>商品内容</h2>
+
+  <!-- 修改这里：商品内容列表 -->
+  <ul>
+    <li>电子资料 / 文件下载</li>
+    <li>购买后按订单信息人工核对付款</li>
+    <li>核实到账后发送下载地址或兑换内容</li>
+  </ul>
+
+  <h2>购买须知</h2>
+
+  <!-- 修改这里：售后说明 -->
+  <ul>
+    <li>付款前请确认商品内容与需求相符。</li>
+    <li>付款后请保留订单编号，并联系卖家核对。</li>
+    <li>交付时间：通常在核实付款后尽快处理。</li>
+    <li>售后联系：请通过下方公布的联系方式联系。</li>
+  </ul>
+</section>
+
+<section class="panel" id="buy">
+  <h2>购买与付款</h2>
+  <p>先生成订单编号，再选择付款方式。付款后请联系卖家，并提供订单编号。</p>
+
+  <div class="order">
+    <div>你的订单编号（临时生成）</div>
+
+    <code id="orderId">点击下方按钮生成</code>
+
+    <button class="btn secondary" onclick="createOrder()">
+      生成 / 更新订单编号
+    </button>
+
+    <button class="btn secondary" onclick="copyOrder()">
+      复制订单编号
+    </button>
+
+    <p class="desc">
+      注意：订单编号仅由当前网页生成，不代表付款成功，
+      也不会自动保存到商家后台。
+    </p>
+  </div>
+
+  <div class="paygrid">
+
+    <div class="paybox">
+      <h3>微信支付</h3>
+
+      <!-- 修改这里：替换为自己的真实微信收款二维码 -->
+      <img class="qr"
+           src="wechat-qr.png"
+           alt="微信收款二维码"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+
+      <div style="display:none" class="notice">
+        请将自己的微信收款二维码图片命名为 wechat-qr.png，
+        与本 HTML 放在同一目录，或修改图片地址。
+      </div>
+
+      <p>请扫描二维码付款</p>
+    </div>
+
+    <div class="paybox">
+      <h3>支付宝</h3>
+
+      <!-- 修改这里：替换为自己的真实支付宝收款二维码 -->
+      <img class="qr"
+           src="alipay-qr.png"
+           alt="支付宝收款二维码"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+
+      <div style="display:none" class="notice">
+        请将自己的支付宝收款二维码图片命名为 alipay-qr.png，
+        与本 HTML 放在同一目录，或修改图片地址。
+      </div>
+
+      <p>请扫描二维码付款</p>
+    </div>
+
+  </div>
+
+  <!-- 修改这里：如有第三方支付链接，填入真实链接 -->
+  <a class="btn primary"
+     id="paymentLink"
+     href="#"
+     target="_blank"
+     rel="noopener"
+     style="display:none">
+     前往安全支付页面
+  </a>
+
+  <div class="notice">
+    付款后请联系卖家核对。
+    卖家必须在微信 / 支付宝 / 支付平台后台确认真实到账，
+    不能仅凭付款截图、买家页面或本网页判断付款成功。
+  </div>
+
+  <!-- 修改这里：替换为你的客服链接 -->
+  <a class="btn secondary"
+     href="https://example.com"
+     target="_blank"
+     rel="noopener">
+     付款后联系卖家 / 提交订单编号
+  </a>
+
+</section>
+
+<section class="panel">
+  <h2>付款核实与交付</h2>
+
+  <ol>
+    <li>商家在收款账户后台核对到账金额、订单信息与付款状态。</li>
+    <li>核对无误后，通过客服渠道联系买家。</li>
+    <li>发送商品下载链接、文件、兑换码或其他约定内容。</li>
+  </ol>
+
+  <!-- 修改这里：交付说明 -->
+  <p class="desc">交付内容由卖家核实付款后提供。</p>
+</section>
+
+</main>
+
+<footer>
+  <!-- 修改这里：版权、店铺主体及联系方式 -->
+  © 2026 星光数字小店 · 请合法经营并遵守支付平台规定
+</footer>
+
+<script>
+
+// 订单号仅在用户当前浏览器生成。
+// 它不是服务器订单，也不能验证支付。
+
+function createOrder(){
+  const now = new Date();
+
+  const stamp =
+    now.getFullYear().toString()+
+    String(now.getMonth()+1).padStart(2,'0')+
+    String(now.getDate()).padStart(2,'0')+
+    String(now.getHours()).padStart(2,'0')+
+    String(now.getMinutes()).padStart(2,'0')+
+    String(now.getSeconds()).padStart(2,'0');
+
+  const rand = Math.random().toString(36).slice(2,7).toUpperCase();
+
+  document.getElementById('orderId').textContent='D'+stamp+rand;
+}
+
+async function copyOrder(){
+  const value=document.getElementById('orderId').textContent;
+
+  if(value==='点击下方按钮生成'){
+    alert('请先生成订单编号');
+    return;
+  }
+
+  try{
+    await navigator.clipboard.writeText(value);
+    alert('订单编号已复制，请在付款后发送给卖家。');
+  }catch(e){
+    alert('复制可能受浏览器限制，请手动复制：'+value);
+  }
+}
+
+// 修改这里：如有真实支付链接，取消下面注释并替换链接。
+// const url = "https://你的真实支付链接";
+// const pay = document.getElementById("paymentLink");
+// pay.href = url;
+// pay.style.display = "block";
+
+</script>
 </body>
 </html>
